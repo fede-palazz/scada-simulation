@@ -5,3 +5,6 @@ tmp/
 .vscode/
 .prettierrc
 .directory
+
+# Mosquitto data folder
+**/mosquitto/data/mosquitto.db

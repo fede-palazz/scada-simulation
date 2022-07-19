@@ -11,6 +11,7 @@
         // Clean session
         clean: true,
         connectTimeout: 4000,
+        reconnectPeriod: 0, // Disable automatic reconnection
         // Auth
         clientId: "frontend_test",
         username: "streamsheets",
@@ -19,7 +20,7 @@
       const client = mqtt.connect("ws://localhost:9001", options);
       client.on("connect", function () {
         console.log("Connected");
-        client.subscribe("cedalo/powerplant/plants/windmill", function (err) {
+        client.subscribe("cedalo/operator-hmi/machine", function (err) {
           if (!err) {
             console.log("Subscribed!");
           }
