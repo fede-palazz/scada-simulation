@@ -5,6 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MQTT Client Simulation</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        margin-left: 20px;
+      }
+
+      .disconnected {
+        color: red;
+      }
+
+      .disconnected::after {
+        content: "Disconnected from broker";
+        color: red;
+      }
+
+      .connected {
+        color: blue;
+      }
+
+      .connected::after {
+        content: "Connected to broker";
+        color: blue;
+      }
+
+      img {
+        width: 70vw;
+        margin-left: 15px;
+      }
+
+      .data-item {
+        margin-left: 25px;
+        font-size: large;
+      }
+
+      .alarm-active::after {
+        content: "alarm activated";
+        color: red;
+        text-transform: uppercase;
+        animation: blink-animation 1s steps(5, start) infinite;
+        -webkit-animation: blink-animation 1s steps(5, start) infinite;
+      }
+
+      .alarm-deactive::after {
+        content: "alarm deactivated";
+        color: blue;
+        text-transform: uppercase;
+      }
+
+      @keyframes blink-animation {
+        to {
+          visibility: hidden;
+        }
+      }
+      @-webkit-keyframes blink-animation {
+        to {
+          visibility: hidden;
+        }
+      }
+    </style>
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <script>
       const options = {
@@ -18,21 +83,60 @@
         password: "vVIGFFZBne",
       };
       const client = mqtt.connect("ws://localhost:9001", options);
+      const topic = "cedalo/operator-hmi/machine";
       client.on("connect", function () {
         console.log("Connected");
-        client.subscribe("cedalo/operator-hmi/machine", function (err) {
+        document
+          .getElementById("status-field")
+          .classList.remove("disconnected");
+        document.getElementById("status-field").classList.add("connected");
+
+        client.subscribe(topic, function (err) {
           if (!err) {
             console.log("Subscribed!");
+            document.getElementById(
+              "topic-field"
+            ).innerHTML += `Subscribed to ${topic}`;
           }
         });
       });
 
       client.on("message", function (topic, message) {
-        // message is Buffer
-        console.log(message.toString());
-        // client.end();
+        // const data = {
+        //   "Machine Data": { Speed: 46, Power: 2007, Alarm: false },
+        // };
+        // Parse the MQTT message
+        const response = JSON.parse(message.toString())["Machine Data"];
+        // console.log(response);
+        // Update field values
+        document.getElementById(
+          "temp-field"
+        ).innerText = `Temperature: ${response.temp} [°C]`;
+        document.getElementById(
+          "power-field"
+        ).innerText = `Power: ${response.power} [W]`;
+        // Check for alarms
+        if (response.alarm) {
+          document
+            .getElementById("alarm-field")
+            .classList.replace("alarm-deactive", "alarm-active");
+        } else document.getElementById("alarm-field").classList.replace("alarm-active", "alarm-deactive");
       });
     </script>
   </head>
-  <body></body>
+  <body>
+    <h1>MQTT SCADA Simulation</h1>
+    <p class="data-item disconnected" id="status-field">
+      <b>STATUS:</b>
+    </p>
+    <p class="data-item" id="topic-field">
+      <b>TOPIC:</b>
+    </p>
+
+    <img src="./assets/machine.jpg" />
+
+    <p class="data-item" id="temp-field">Temperature: [°C]</p>
+    <p class="data-item" id="power-field">Power: [W]</p>
+    <p class="data-item alarm-deactive" id="alarm-field"></p>
+  </body>
 </html>

@@ -8,7 +8,7 @@
         "state": "stopped",
         "metadata": {
           "owner": "admin",
-          "lastModified": 1658299711228,
+          "lastModified": 1658308780042,
           "lastModifiedBy": "unknown",
           "fileVersion": "2.0.0"
         },
@@ -51,13 +51,13 @@
                   "level": 0
                 },
                 "A7": {
-                  "value": "Temp",
+                  "value": "temp",
                   "type": "string",
                   "level": 1
                 },
                 "B7": {
                   "formula": "RANDBETWEEN(35,100,-2,2,45)",
-                  "value": 50,
+                  "value": 38,
                   "type": "undefined",
                   "level": 0
                 },
@@ -67,13 +67,13 @@
                   "level": 0
                 },
                 "A8": {
-                  "value": "Power",
+                  "value": "power",
                   "type": "string",
                   "level": 1
                 },
                 "B8": {
                   "formula": "RANDBETWEEN(1200,4500,-100,120,2000)",
-                  "value": 2045,
+                  "value": 2608,
                   "type": "undefined",
                   "level": 0
                 },
@@ -83,7 +83,7 @@
                   "level": 0
                 },
                 "A9": {
-                  "value": "Alarm",
+                  "value": "alarm",
                   "type": "string",
                   "level": 1
                 },
@@ -120,51 +120,6 @@
                   "references": [
                     "|MQTT_Producer"
                   ]
-                },
-                "A29": {
-                  "value": "Wind simulation:",
-                  "type": "string",
-                  "level": 0
-                },
-                "B29": {
-                  "value": "B6 simulates wind speed changes, by using a function called RANDBETWEEN(). This function gives back random numbers.",
-                  "type": "string",
-                  "level": 0
-                },
-                "A30": {
-                  "value": "Data calculation:",
-                  "type": "string",
-                  "level": 0
-                },
-                "B30": {
-                  "value": "B11 until B15 calculate values based on the current change of wind. Using simple spreadsheet formulars it is possible to calculate the wind speed and the angle of the blades.",
-                  "type": "string",
-                  "level": 0
-                },
-                "A31": {
-                  "value": "Data publish:",
-                  "type": "string",
-                  "level": 0
-                },
-                "B31": {
-                  "value": "B20 uses the stream function MQTT.PUBLISH to send data to a MQTT Broker. This data is then available under the topic in B19.",
-                  "type": "string",
-                  "level": 0
-                },
-                "A32": {
-                  "value": "Wind turbine input:",
-                  "type": "string",
-                  "level": 0
-                },
-                "B32": {
-                  "value": "The blades of the turbine in this simulation are shapes. As everything in Streamsheets, these shapes are based on a function. Parameters of a function can be static or set via cell references and this way made dynamic.",
-                  "type": "string",
-                  "level": 0
-                },
-                "B33": {
-                  "value": "In this szenario all shapes use the x & y parameters from cells B22 and B23. Further, the blades of the turbine use the cell value from B13 to calculate the blade positioning in the \"angle\" parameter.",
-                  "type": "string",
-                  "level": 0
                 }
               },
               "namedCells": {},
@@ -471,13 +426,13 @@
                     },
                     "localY": {
                       "f": "HEIGHT*0.5",
-                      "v": "361.1149088541667"
+                      "v": "399.0799283981323"
                     },
                     "width": {
                       "v": "3340"
                     },
                     "height": {
-                      "v": "722.2298177083334"
+                      "v": "798.1598567962646"
                     },
                     "parent": 500151136714,
                     "shape": {
@@ -819,13 +774,13 @@
                     },
                     "localY": {
                       "f": "HEIGHT*0.5",
-                      "v": "361.1149088541667"
+                      "v": "399.0799283981323"
                     },
                     "width": {
                       "v": "3340"
                     },
                     "height": {
-                      "v": "722.2298177083334"
+                      "v": "798.1598567962646"
                     },
                     "parent": 301110506388,
                     "shape": {
@@ -987,7 +942,7 @@
                 ],
                 "timestamp": 0,
                 "version": 1,
-                "changed": 166110811611
+                "changed": 312180473301
               },
               "properties": {
                 "cols": [],
@@ -1034,7 +989,7 @@
                 "shapes": [],
                 "timestamp": 0,
                 "version": 1,
-                "changed": 901106569569
+                "changed": 33005788080
               },
               "properties": {
                 "cols": [],
@@ -1083,7 +1038,7 @@
               "name": "HTTP_Client_Producer",
               "type": "producer",
               "state": "connected",
-              "timestamp": 1658299600799,
+              "timestamp": 1658304032483,
               "scope": {
                 "id": "root"
               }
@@ -1100,41 +1055,7 @@
               "name": "Webhook",
               "type": "stream",
               "state": "connected",
-              "timestamp": 1658299600800,
-              "scope": {
-                "id": "root"
-              }
-            },
-            "type": "object",
-            "info": {
-              "rawtype": "object"
-            },
-            "level": 0
-          },
-          "|MQTT_Consumer": {
-            "value": {
-              "id": "CONSUMER_MQTT",
-              "name": "MQTT_Consumer",
-              "type": "stream",
-              "state": "connected",
-              "timestamp": 1658299605614,
-              "scope": {
-                "id": "root"
-              }
-            },
-            "type": "object",
-            "info": {
-              "rawtype": "object"
-            },
-            "level": 0
-          },
-          "|MQTT_Producer": {
-            "value": {
-              "id": "PRODUCER_MQTT",
-              "name": "MQTT_Producer",
-              "type": "producer",
-              "state": "connected",
-              "timestamp": 1658299605620,
+              "timestamp": 1658304032485,
               "scope": {
                 "id": "root"
               }
@@ -1151,7 +1072,41 @@
               "name": "Wind_Data",
               "type": "stream",
               "state": "connected",
-              "timestamp": 1658299605616,
+              "timestamp": 1658304032488,
+              "scope": {
+                "id": "root"
+              }
+            },
+            "type": "object",
+            "info": {
+              "rawtype": "object"
+            },
+            "level": 0
+          },
+          "|MQTT_Consumer": {
+            "value": {
+              "id": "CONSUMER_MQTT",
+              "name": "MQTT_Consumer",
+              "type": "stream",
+              "state": "connected",
+              "timestamp": 1658304032489,
+              "scope": {
+                "id": "root"
+              }
+            },
+            "type": "object",
+            "info": {
+              "rawtype": "object"
+            },
+            "level": 0
+          },
+          "|MQTT_Producer": {
+            "value": {
+              "id": "PRODUCER_MQTT",
+              "name": "MQTT_Producer",
+              "type": "producer",
+              "state": "connected",
+              "timestamp": 1658304032490,
               "scope": {
                 "id": "root"
               }
@@ -1793,262 +1748,6 @@
                               "o-localculture": {
                                 "v": "number%3B4%3Bfalse",
                                 "t": "s"
-                              }
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "n": "28",
-                      "a-c": [
-                        {
-                          "n": "2",
-                          "o-cell": {
-                            "o-t": {
-                              "o-fontstyle": {
-                                "v": "1"
-                              }
-                            },
-                            "o-a": {
-                              "o-leftborderstyle": {
-                                "v": "1"
-                              },
-                              "o-topborderstyle": {
-                                "v": "1"
-                              },
-                              "o-rightborderstyle": {
-                                "v": "1"
-                              },
-                              "o-leftbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-topbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-rightbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-bottombordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-leftborderwidth": {
-                                "v": "2"
-                              },
-                              "o-topborderwidth": {
-                                "v": "2"
-                              },
-                              "o-rightborderwidth": {
-                                "v": "2"
-                              },
-                              "o-bottomborderwidth": {
-                                "v": "2"
-                              }
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "n": "29",
-                      "a-c": [
-                        {
-                          "n": "2",
-                          "o-cell": {
-                            "o-t": {
-                              "o-fontstyle": {
-                                "v": "1"
-                              }
-                            },
-                            "o-a": {
-                              "o-leftborderstyle": {
-                                "v": "1"
-                              },
-                              "o-rightborderstyle": {
-                                "v": "1"
-                              },
-                              "o-leftbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-topbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-rightbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-bottombordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-leftborderwidth": {
-                                "v": "2"
-                              },
-                              "o-topborderwidth": {
-                                "v": "2"
-                              },
-                              "o-rightborderwidth": {
-                                "v": "2"
-                              },
-                              "o-bottomborderwidth": {
-                                "v": "2"
-                              }
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "n": "30",
-                      "a-c": [
-                        {
-                          "n": "2",
-                          "o-cell": {
-                            "o-t": {
-                              "o-fontstyle": {
-                                "v": "1"
-                              }
-                            },
-                            "o-a": {
-                              "o-leftborderstyle": {
-                                "v": "1"
-                              },
-                              "o-rightborderstyle": {
-                                "v": "1"
-                              },
-                              "o-leftbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-topbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-rightbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-bottombordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-leftborderwidth": {
-                                "v": "2"
-                              },
-                              "o-topborderwidth": {
-                                "v": "2"
-                              },
-                              "o-rightborderwidth": {
-                                "v": "2"
-                              },
-                              "o-bottomborderwidth": {
-                                "v": "2"
-                              }
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "n": "31",
-                      "a-c": [
-                        {
-                          "n": "2",
-                          "o-cell": {
-                            "o-t": {
-                              "o-fontstyle": {
-                                "v": "1"
-                              }
-                            },
-                            "o-a": {
-                              "o-leftborderstyle": {
-                                "v": "1"
-                              },
-                              "o-rightborderstyle": {
-                                "v": "1"
-                              },
-                              "o-leftbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-topbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-rightbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-bottombordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-leftborderwidth": {
-                                "v": "2"
-                              },
-                              "o-topborderwidth": {
-                                "v": "2"
-                              },
-                              "o-rightborderwidth": {
-                                "v": "2"
-                              },
-                              "o-bottomborderwidth": {
-                                "v": "2"
-                              }
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "n": "32",
-                      "a-c": [
-                        {
-                          "n": "2",
-                          "o-cell": {
-                            "o-a": {
-                              "o-leftborderstyle": {
-                                "v": "1"
-                              },
-                              "o-rightborderstyle": {
-                                "v": "1"
-                              },
-                              "o-bottomborderstyle": {
-                                "v": "1"
-                              },
-                              "o-leftbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-topbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-rightbordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-bottombordercolor": {
-                                "v": "%23ff9900",
-                                "t": "s"
-                              },
-                              "o-leftborderwidth": {
-                                "v": "2"
-                              },
-                              "o-topborderwidth": {
-                                "v": "2"
-                              },
-                              "o-rightborderwidth": {
-                                "v": "2"
-                              },
-                              "o-bottomborderwidth": {
-                                "v": "2"
                               }
                             }
                           }
@@ -8723,7 +8422,7 @@
               "name": "HTTP_Client_Producer",
               "type": "producer",
               "state": "connected",
-              "timestamp": 1658269724263,
+              "timestamp": 1658304032483,
               "scope": {
                 "id": "root"
               }
@@ -8740,7 +8439,7 @@
               "name": "Webhook",
               "type": "stream",
               "state": "connected",
-              "timestamp": 1658269724265,
+              "timestamp": 1658304032485,
               "scope": {
                 "id": "root"
               }
@@ -8757,7 +8456,7 @@
               "name": "Wind_Data",
               "type": "stream",
               "state": "connected",
-              "timestamp": 1658269724269,
+              "timestamp": 1658304032488,
               "scope": {
                 "id": "root"
               }
@@ -8774,7 +8473,7 @@
               "name": "MQTT_Consumer",
               "type": "stream",
               "state": "connected",
-              "timestamp": 1658269724270,
+              "timestamp": 1658304032489,
               "scope": {
                 "id": "root"
               }
@@ -8791,7 +8490,7 @@
               "name": "MQTT_Producer",
               "type": "producer",
               "state": "connected",
-              "timestamp": 1658269724271,
+              "timestamp": 1658304032490,
               "scope": {
                 "id": "root"
               }
@@ -10701,7 +10400,7 @@
       "owner": null,
       "disabled": null,
       "className": "ConnectorConfiguration",
-      "lastModified": "2022-07-20T06:46:40.725Z",
+      "lastModified": "2022-07-19T14:15:53.239Z",
       "lastAccessed": "2019-09-06T11:23:30.642Z",
       "provider": {
         "_id": "@cedalo/stream-mqtt",
@@ -10725,43 +10424,6 @@
       "state": "disconnected"
     },
     {
-      "id": "CONSUMER_MQTT",
-      "name": "MQTT_Consumer",
-      "scope": {
-        "id": "root"
-      },
-      "owner": null,
-      "disabled": null,
-      "className": "ConsumerConfiguration",
-      "lastModified": "2022-07-20T06:46:40.735Z",
-      "lastAccessed": "2021-04-06T10:05:52.761Z",
-      "connector": {
-        "_id": "CONNECTOR_MQTT",
-        "id": "CONNECTOR_MQTT",
-        "className": "ConnectorConfiguration",
-        "owner": null,
-        "disabled": null,
-        "lastModified": "2022-06-27T08:47:08.777Z",
-        "lastAccessed": "2019-09-06T11:23:30.642Z",
-        "isRef": true
-      },
-      "description": "",
-      "filter": null,
-      "labelAttribute": null,
-      "idAttribute": null,
-      "samplePayloads": null,
-      "providerId": "@cedalo/stream-mqtt",
-      "mimeType": "auto",
-      "fixedClientId": false,
-      "clientId": "",
-      "clean": true,
-      "userPropertiesSubscribe": [],
-      "topics": [
-        "#"
-      ],
-      "state": "connected"
-    },
-    {
       "id": "HkZRIJtchH",
       "name": "Wind_Data",
       "scope": {
@@ -10770,7 +10432,7 @@
       "owner": null,
       "disabled": false,
       "className": "ConsumerConfiguration",
-      "lastModified": "2022-07-20T06:46:40.729Z",
+      "lastModified": "2022-06-27T08:47:08.778Z",
       "lastAccessed": "2019-11-26T10:32:53.686Z",
       "connector": {
         "_id": "CONNECTOR_MQTT",
@@ -10799,6 +10461,43 @@
       "state": "connected"
     },
     {
+      "id": "CONSUMER_MQTT",
+      "name": "MQTT_Consumer",
+      "scope": {
+        "id": "root"
+      },
+      "owner": null,
+      "disabled": null,
+      "className": "ConsumerConfiguration",
+      "lastModified": "2022-07-19T10:01:15.242Z",
+      "lastAccessed": "2021-04-06T10:05:52.761Z",
+      "connector": {
+        "_id": "CONNECTOR_MQTT",
+        "id": "CONNECTOR_MQTT",
+        "className": "ConnectorConfiguration",
+        "owner": null,
+        "disabled": null,
+        "lastModified": "2022-06-27T08:47:08.777Z",
+        "lastAccessed": "2019-09-06T11:23:30.642Z",
+        "isRef": true
+      },
+      "description": "",
+      "filter": null,
+      "labelAttribute": null,
+      "idAttribute": null,
+      "samplePayloads": null,
+      "providerId": "@cedalo/stream-mqtt",
+      "mimeType": "auto",
+      "fixedClientId": false,
+      "clientId": "",
+      "clean": true,
+      "userPropertiesSubscribe": [],
+      "topics": [
+        "#"
+      ],
+      "state": "connected"
+    },
+    {
       "id": "PRODUCER_MQTT",
       "name": "MQTT_Producer",
       "scope": {
@@ -10807,7 +10506,7 @@
       "owner": null,
       "disabled": false,
       "className": "ProducerConfiguration",
-      "lastModified": "2022-07-20T06:46:40.737Z",
+      "lastModified": "2022-06-27T08:47:08.781Z",
       "lastAccessed": "2019-10-20T17:40:35.491Z",
       "description": "",
       "connector": {
