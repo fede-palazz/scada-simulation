@@ -25,13 +25,13 @@ client.on("connect", function () {
   });
 });
 
-client.on("message", function (message) {
+client.on("message", function (topic, message) {
   // const data = {
   //   "Machine Data": { Speed: 46, Power: 2007, Alarm: false },
   // };
   // Parse the MQTT message
   const response = JSON.parse(message.toString())["Machine Data"];
-  // console.log(response);
+  //   console.log(response);
   // Update field values
   document.getElementById(
     "temp-field"
