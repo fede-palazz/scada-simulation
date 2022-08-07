@@ -29,6 +29,7 @@ h1 {
 
 img {
   width: 70vw;
+  max-width: 500px;
   margin-left: 15px;
 }
 

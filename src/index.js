@@ -17,7 +17,7 @@ client.on("connect", function () {
 
   client.subscribe(topic, function (err) {
     if (!err) {
-      console.log("Subscribed!");
+      console.log(`Subscribed to topic: ${topic}`);
       document.getElementById(
         "topic-field"
       ).innerHTML += `Subscribed to ${topic}`;
@@ -25,7 +25,7 @@ client.on("connect", function () {
   });
 });
 
-client.on("message", function (topic, message) {
+client.on("message", function (message) {
   // const data = {
   //   "Machine Data": { Speed: 46, Power: 2007, Alarm: false },
   // };
