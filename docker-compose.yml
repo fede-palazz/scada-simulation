@@ -48,6 +48,10 @@ services:
       - mosquitto
     # logging:
     #   driver: "none"
+  grpc-server:
+    build: ./services/grpc-server
+    ports:
+      - "8089:8089"
 volumes:
   streamsheets-data:
     external: true
