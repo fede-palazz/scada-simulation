@@ -1,0 +1,36 @@
+{
+  "name": "scada-simulation",
+  "version": "1.0.0",
+  "description": "Simulation of a SCADA system using MQTT (Mosquitto) and Eclipse Streamsheets",
+  "main": "./src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.dev.js",
+    "dev": "webpack serve --config webpack.dev.js",
+    "start": "webpack serve --config webpack.dev.js --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fede-palazz/scada-simulation.git"
+  },
+  "keywords": [],
+  "author": "federico palazzi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fede-palazz/scada-simulation/issues"
+  },
+  "homepage": "https://github.com/fede-palazz/scada-simulation#readme",
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3"
+  },
+  "dependencies": {
+    "precompiled-mqtt": "^4.3.13"
+  }
+}

@@ -1,3 +1,7 @@
+import "./style.css";
+import "./assets/machine.jpg";
+
+import mqtt from "precompiled-mqtt";
 const options = {
   // Clean session
   clean: true,
@@ -51,6 +55,7 @@ mqttClient.on("message", function (topic, message) {
 
 // gRPC setup
 const proxyPort = 8089;
+const proxyUrl = `http://localhost:${proxyPort}`;
 
 function sendgRPCRequest() {
   const field = document.getElementById("inputTxt");
@@ -58,9 +63,8 @@ function sendgRPCRequest() {
   field.value = "";
 
   // Fetch data
-  const url = `http://localhost:${proxyPort}`;
 
-  fetch(url + `/?name=${name}`)
+  fetch(proxyUrl + `/?name=${name}`)
     .then((res) => res.json())
     .then((res) => {
       const elem = document.createElement("p");

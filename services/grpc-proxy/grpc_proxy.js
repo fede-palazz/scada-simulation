@@ -3,7 +3,7 @@ const cors = require("cors");
 const grpc = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 
-const PROTO_PATH = "../grpc-server/schema.proto";
+const PROTO_PATH = "./schema.proto";
 const app = express();
 const port = 8089;
 
@@ -19,7 +19,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 const hello_proto = grpc.loadPackageDefinition(packageDefinition).teaming;
 
 const client = new hello_proto.Greeter(
-  "localhost:9090",
+  "grpc-server:9090",
   grpc.credentials.createInsecure()
 );
 
