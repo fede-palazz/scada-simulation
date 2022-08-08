@@ -8,14 +8,16 @@ const options = {
   username: "streamsheets",
   password: "vVIGFFZBne",
 };
-const client = mqtt.connect("ws://localhost:9001", options);
+const mqttClient = mqtt.connect("ws://localhost:9001", options);
 const topic = "cedalo/operator-hmi/machine";
-client.on("connect", function () {
+
+// MQTT setup
+mqttClient.on("connect", function () {
   console.log("Connected");
   document.getElementById("status-field").classList.remove("disconnected");
   document.getElementById("status-field").classList.add("connected");
 
-  client.subscribe(topic, function (err) {
+  mqttClient.subscribe(topic, function (err) {
     if (!err) {
       console.log(`Subscribed to topic: ${topic}`);
       document.getElementById(
@@ -25,7 +27,7 @@ client.on("connect", function () {
   });
 });
 
-client.on("message", function (topic, message) {
+mqttClient.on("message", function (topic, message) {
   // const data = {
   //   "Machine Data": { Speed: 46, Power: 2007, Alarm: false },
   // };
@@ -47,14 +49,16 @@ client.on("message", function (topic, message) {
   } else document.getElementById("alarm-field").classList.replace("alarm-active", "alarm-deactive");
 });
 
-/*
-function sendRequest() {
+// gRPC setup
+const proxyPort = 8089;
+
+function sendgRPCRequest() {
   const field = document.getElementById("inputTxt");
   const name = field.value;
   field.value = "";
 
   // Fetch data
-  const url = "http://localhost:3000";
+  const url = `http://localhost:${proxyPort}`;
 
   fetch(url + `/?name=${name}`)
     .then((res) => res.json())
@@ -64,4 +68,5 @@ function sendRequest() {
       document.getElementById("container").appendChild(elem);
     });
 }
-*/
+
+document.getElementById("callBtn").addEventListener("click", sendgRPCRequest);

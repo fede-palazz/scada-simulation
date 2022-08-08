@@ -5,6 +5,7 @@ const protoLoader = require("@grpc/proto-loader");
 
 const PROTO_PATH = "../grpc-server/schema.proto";
 const app = express();
+const port = 8089;
 
 app.use(cors());
 
@@ -30,6 +31,6 @@ app.get("/", function (req, res) {
   });
 });
 
-app.listen(3000, function () {
-  console.log("Proxy: listening on port 3000");
+app.listen(port, function () {
+  console.log(`Proxy: listening on port ${port}`);
 });
