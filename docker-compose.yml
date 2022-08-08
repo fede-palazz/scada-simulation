@@ -48,6 +48,34 @@ services:
       - mosquitto
     # logging:
     #   driver: "none"
+  grpc-server:
+    build: ./services/grpc-server
+    image: grpc-server
+    ports:
+      - "9090:9090"
+    volumes: # Add volumes for dev purposes
+      - ./services/grpc-server:/app
+      - /app/node_modules
+    # networks:
+    #   - grpc-net
+    command: npm run dev
+  grpc-proxy:
+    build: ./services/grpc-proxy
+    image: grpc-proxy
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./services/grpc-proxy:/app
+      - /app/node_modules
+    command: npm run dev
+    # networks:
+    #   - grpc-net
+  # frontend-app:
+  #   image: mqtt-grpc-frontend
+  #   build: .
+  #   restart: always
+  #   ports:
+  #     - "8082:80"
 volumes:
   streamsheets-data:
     external: true

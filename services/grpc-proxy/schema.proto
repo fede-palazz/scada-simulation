@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package teaming;
+
+// The greeting service definition.
+service Machine {
+  // Get current task
+  rpc CurrentTask (CurrentTaskRequest) returns (CurrentTaskReply) {}
+  // Get risks factor
+  rpc RisksFactor (ErgonomicRisksRequest) returns (ErgonomicRisksReply) {}
+   // Check for human intervention
+  rpc HumanIntervention (HumanInterventionRequest) returns (HumanInterventionReply) {}
+
+}
+
+message CurrentTaskRequest {
+}
+
+message CurrentTaskReply {
+  string message = 1;
+}
+
+message ErgonomicRisksRequest {
+}
+
+message ErgonomicRisksReply {
+  int32 message = 1;
+}
+
+message HumanInterventionRequest {
+}
+
+message HumanInterventionReply {
+  bool message = 1;
+}

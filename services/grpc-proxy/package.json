@@ -1,0 +1,22 @@
+{
+  "name": "grpc-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "grpc_proxy.js",
+  "scripts": {
+    "start": "node proxy.js",
+    "dev": "nodemon proxy.js"
+  },
+  "keywords": [],
+  "author": "federico palazzi",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.6.8",
+    "@grpc/proto-loader": "^0.7.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
