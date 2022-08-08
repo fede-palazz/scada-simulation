@@ -3,17 +3,33 @@ syntax = "proto3";
 package teaming;
 
 // The greeting service definition.
-service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
+service Machine {
+  // Get current task
+  rpc CurrentTask (CurrentTaskRequest) returns (CurrentTaskReply) {}
+  // Get risks factor
+  rpc RisksFactor (ErgonomicRisksRequest) returns (ErgonomicRisksReply) {}
+   // Check for human intervention
+  rpc HumanIntervention (HumanInterventionRequest) returns (HumanInterventionReply) {}
+
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
+message CurrentTaskRequest {
 }
 
-// The response message containing the greetings
-message HelloReply {
+message CurrentTaskReply {
   string message = 1;
+}
+
+message ErgonomicRisksRequest {
+}
+
+message ErgonomicRisksReply {
+  int32 message = 1;
+}
+
+message HumanInterventionRequest {
+}
+
+message HumanInterventionReply {
+  bool message = 1;
 }

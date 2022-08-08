@@ -25,8 +25,13 @@
     <p class="data-item alarm-deactive" id="alarm-field"></p>
 
     <div id="container">
-      <input type="text" name="inputTxt" id="inputTxt" />
-      <button id="callBtn">Send gRPC request</button>
+      <select name="grpc-req-list" id="grpc-req-list">
+        <option value="task">Current production task</option>
+        <option value="ergonomic">Ergonomic risks factor [%]</option>
+        <option value="intervention">Human intervention needed?</option>
+      </select>
+      <button id="call-btn">Send gRPC request</button>
+      <p id="grpc-response"></p>
     </div>
   </body>
 </html>

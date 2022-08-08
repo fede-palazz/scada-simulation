@@ -16,19 +16,33 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   defaults: true,
   oneofs: true,
 });
-const hello_proto = grpc.loadPackageDefinition(packageDefinition).teaming;
+const machine_proto = grpc.loadPackageDefinition(packageDefinition).teaming;
 
-const client = new hello_proto.Greeter(
+const client = new machine_proto.Machine(
   "grpc-server:9090",
   grpc.credentials.createInsecure()
 );
 
 app.get("/", function (req, res) {
-  //   console.log(req);
-  const name = req.query.name;
-  client.SayHello({ name: name }, function (err, response) {
-    res.send(JSON.stringify(`${response.message}`));
-  });
+  // const name = req.query.type;
+
+  switch (req.query.type) {
+    case "task":
+      client.CurrentTask({}, function (err, response) {
+        res.send(JSON.stringify(`${response.message}`));
+      });
+      break;
+    case "ergonomic":
+      client.RisksFactor({}, function (err, response) {
+        res.send(JSON.stringify(`${response.message}`));
+      });
+      break;
+    case "intervention":
+      client.HumanIntervention({}, function (err, response) {
+        res.send(JSON.stringify(`${response.message}`));
+      });
+      break;
+  }
 });
 
 app.listen(port, function () {

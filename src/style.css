@@ -66,3 +66,8 @@ img {
 #container {
   margin: 20px 0 40px 25px;
 }
+
+select {
+  min-width: 130px;
+  width: fit-content;
+}

@@ -9,13 +9,32 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   defaults: true,
   oneofs: true,
 });
-const hello_proto = grpc.loadPackageDefinition(packageDefinition).teaming;
+const machine_proto = grpc.loadPackageDefinition(packageDefinition).teaming;
+
+function getRandomBetween(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 /**
- * Implements the SayHello RPC method.
+ * Implements the CurrentTask RPC method.
  */
-function sayHello(call, callback) {
-  callback(null, { message: "Hello " + call.request.name });
+function getCurrentTask(call, callback) {
+  const currentTask = getRandomBetween(1, 11);
+  callback(null, { message: `Task ${currentTask}` });
+}
+/**
+ * Implements the RisksFactor RPC method.
+ */
+function getRisksFactor(call, callback) {
+  const risksFactor = getRandomBetween(5, 100);
+  callback(null, { message: risksFactor });
+}
+/**
+ * Implements the HumanIntervention RPC method.
+ */
+function checkHumanIntervention(call, callback) {
+  const intervention = Math.random() < 0.5;
+  callback(null, { message: intervention });
 }
 
 /**
@@ -24,8 +43,10 @@ function sayHello(call, callback) {
  */
 function main() {
   const server = new grpc.Server();
-  server.addService(hello_proto.Greeter.service, {
-    sayHello: sayHello,
+  server.addService(machine_proto.Machine.service, {
+    CurrentTask: getCurrentTask,
+    RisksFactor: getRisksFactor,
+    HumanIntervention: checkHumanIntervention,
   });
   server.bindAsync(
     "0.0.0.0:9090",

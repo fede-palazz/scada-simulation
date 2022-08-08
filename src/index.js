@@ -57,20 +57,17 @@ mqttClient.on("message", function (topic, message) {
 const proxyPort = 8089;
 const proxyUrl = `http://localhost:${proxyPort}`;
 
-function sendgRPCRequest() {
-  const field = document.getElementById("inputTxt");
-  const name = field.value;
-  field.value = "";
-
+function sendgRPCRequest(type) {
   // Fetch data
-
-  fetch(proxyUrl + `/?name=${name}`)
+  fetch(proxyUrl + `/?type=${type}`)
     .then((res) => res.json())
     .then((res) => {
-      const elem = document.createElement("p");
-      elem.innerHTML = res;
-      document.getElementById("container").appendChild(elem);
+      document.getElementById("grpc-response").innerHTML = res;
     });
 }
 
-document.getElementById("callBtn").addEventListener("click", sendgRPCRequest);
+document.getElementById("call-btn").addEventListener("click", () => {
+  const field = document.getElementById("grpc-req-list");
+  const requestType = field.value;
+  sendgRPCRequest(requestType);
+});
