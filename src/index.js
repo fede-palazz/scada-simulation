@@ -46,3 +46,22 @@ client.on("message", function (topic, message) {
       .classList.replace("alarm-deactive", "alarm-active");
   } else document.getElementById("alarm-field").classList.replace("alarm-active", "alarm-deactive");
 });
+
+/*
+function sendRequest() {
+  const field = document.getElementById("inputTxt");
+  const name = field.value;
+  field.value = "";
+
+  // Fetch data
+  const url = "http://localhost:3000";
+
+  fetch(url + `/?name=${name}`)
+    .then((res) => res.json())
+    .then((res) => {
+      const elem = document.createElement("p");
+      elem.innerHTML = res;
+      document.getElementById("container").appendChild(elem);
+    });
+}
+*/

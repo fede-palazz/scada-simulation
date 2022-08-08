@@ -14,4 +14,4 @@ RUN npm install
 COPY . ./
 
 # Run the entrypoint
-CMD ["node", "grpc_server.js"]
+CMD ["node", "grpc_proxy.js"]

@@ -50,12 +50,21 @@ services:
     #   driver: "none"
   grpc-server:
     build: ./services/grpc-server
-    ports:
-      - "8089:8089"
+    image: grpc-server
+    # ports:
+    #   - "8089:8089"
     volumes: # Add volumes for dev purposes
       - ./services/grpc-server:/app
       - /app/node_modules
-    command: npm run dev
+    # command: npm start
+  grpc-proxy:
+    build: ./services/grpc-proxy
+    image: grpc-proxy
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./services/grpc-proxy:/app
+      - /app/node_modules
 volumes:
   streamsheets-data:
     external: true

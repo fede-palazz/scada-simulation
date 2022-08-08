@@ -2,20 +2,19 @@
   "name": "grpc-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "grpc_server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node grpc_server.js",
+    "dev": "nodemon grpc_server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "federico palazzi",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.19"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.6.8",
-    "@grpc/proto-loader": "^0.7.0",
-    "express": "^4.18.1"
+    "@grpc/proto-loader": "^0.7.0"
   }
 }
