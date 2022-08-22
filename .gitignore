@@ -6,4 +6,5 @@ tmp/
 .prettierrc
 .directory
 
-mosquitto.db
+# Mosquitto data folder
+**/mosquitto/data/mosquitto.db
