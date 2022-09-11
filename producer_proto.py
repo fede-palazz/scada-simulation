@@ -2,6 +2,7 @@
 
 from random import choice
 from confluent_kafka import Producer
+import assets.helloworld_pb2 as HelloWorld
 
 if __name__ == '__main__':
 
@@ -17,21 +18,23 @@ if __name__ == '__main__':
         if err:
             print('ERROR: Message failed delivery: {}'.format(err))
         else:
-            print("Produced event to topic {topic}: key = {key:12} value = {value:12}".format(
-                topic=msg.topic(), key=msg.key().decode('utf-8'), value=msg.value().decode('utf-8')))
+            print("Produced event to topic {topic}: name = {name}".format(
+                topic=msg.topic(), name=msg.value()))
 
     # Produce data by selecting random values from these lists.
-    topic = "teaming_events"
-    user_ids = ['eabara', 'jsmith', 'sgarcia',
-                'jbernard', 'htanaka', 'awalther']
-    products = ['book', 'alarm clock', 't-shirts', 'gift card', 'batteries']
+    topic = "teaming_event"
+    names = ['eabara', 'jsmith', 'sgarcia',
+             'jbernard', 'htanaka', 'awalther']
 
     count = 0
-    for _ in range(10):
-
-        user_id = choice(user_ids)
-        product = choice(products)
-        producer.produce(topic, product, user_id, callback=delivery_callback)
+    for _ in range(2):
+        rand_name = choice(names)
+        hello_proto = HelloWorld.HelloMessage(name=rand_name)
+        serialized = hello_proto.SerializeToString()
+        # produce(topic, value, key, callback)
+        # producer.produce(topic, product, user_id, callback=delivery_callback)
+        producer.produce(topic=topic, value=serialized,
+                         callback=delivery_callback)
         count += 1
 
     # Block until the messages are sent.

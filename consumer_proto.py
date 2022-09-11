@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from confluent_kafka import Consumer, OFFSET_BEGINNING
+import assets.helloworld_pb2 as HelloWorld
 
 if __name__ == '__main__':
 
@@ -12,16 +13,16 @@ if __name__ == '__main__':
     consumer = Consumer(config)
 
     # Set up a callback to handle the '--reset' flag.
-    def reset_offset(consumer, partitions):
-        # if args.reset:
-        for p in partitions:
-            p.offset = OFFSET_BEGINNING
-        consumer.assign(partitions)
+    # def reset_offset(consumer, partitions):
+    #     # if args.reset:
+    #     for p in partitions:
+    #         p.offset = OFFSET_BEGINNING
+    #     consumer.assign(partitions)
 
     # Subscribe to topic
-    topic = "teaming_events"
-    consumer.subscribe([topic], on_assign=reset_offset)
-
+    topic = "teaming_event"
+    # consumer.subscribe([topic], on_assign=reset_offset)
+    consumer.subscribe([topic])
     # Poll for new messages from Kafka and print them.
     try:
         while True:
@@ -34,9 +35,14 @@ if __name__ == '__main__':
             elif msg.error():
                 print("ERROR: %s".format(msg.error()))
             else:
+                print('Received: ' + str(msg.value()))
+                hello_proto = HelloWorld.HelloMessage()
+                hello_proto.ParseFromString(msg.value())
+                print("Name: " + hello_proto.name)
+
                 # Extract the (optional) key and value, and print.
-                print("Consumed event from topic {topic}: key = {key:12} value = {value:12}".format(
-                    topic=msg.topic(), key=msg.key().decode('utf-8'), value=msg.value().decode('utf-8')))
+                # print("Consumed event from topic {topic}: key = {key:12} value = {value:12}".format(
+                #     topic=msg.topic(), key=msg.key().decode('utf-8'), value=msg.value().decode('utf-8')))
     except KeyboardInterrupt:
         pass
     finally:
