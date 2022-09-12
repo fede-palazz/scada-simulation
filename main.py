@@ -9,7 +9,7 @@ from time import sleep
 import assets.helloworld_pb2 as HelloWorld
 
 
-def checkMessages(topic):
+def checkMessages(topic, app):
     print(topic)
     config = {'bootstrap.servers': 'localhost:9092',
               'group.id': 'consumer_test',
@@ -22,7 +22,7 @@ def checkMessages(topic):
     consumer.subscribe([topic])
 
     t = threading.current_thread()
-
+    print(type(app))
     # Poll for new messages from Kafka and print them.
     try:
         while getattr(t, "do_run", True):
@@ -39,6 +39,9 @@ def checkMessages(topic):
                 hello_proto = HelloWorld.HelloMessage()
                 hello_proto.ParseFromString(msg.value())
                 print("Name: " + hello_proto.name)
+                # Update UI
+                app.updateMachineData(hello_proto)
+
             sleep(0.1)
 
     except KeyboardInterrupt:
@@ -81,11 +84,14 @@ class OperatorHMI(Tk):
         self.img_lbl = ttk.Label(self.mainframe, image=self.img)
         self.img_lbl.grid(column=0, row=1, sticky=(N, W))
 
+    def updateMachineData(self, data):
+        self.title_lbl["text"] = data.name
+
 
 if __name__ == '__main__':
     app = OperatorHMI()
     # root.after(500, checkMessages, root)
-    t = threading.Thread(target=checkMessages, args=("teaming_event",))
+    t = threading.Thread(target=checkMessages, args=("teaming_event", app,))
     t.start()
     app.mainloop()
     t.do_run = False
