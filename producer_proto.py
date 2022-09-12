@@ -3,6 +3,7 @@
 from random import choice
 from confluent_kafka import Producer
 import assets.helloworld_pb2 as HelloWorld
+from time import sleep
 
 if __name__ == '__main__':
 
@@ -27,7 +28,7 @@ if __name__ == '__main__':
              'jbernard', 'htanaka', 'awalther']
 
     count = 0
-    for _ in range(2):
+    for _ in range(10):
         rand_name = choice(names)
         hello_proto = HelloWorld.HelloMessage(name=rand_name)
         serialized = hello_proto.SerializeToString()
@@ -36,7 +37,7 @@ if __name__ == '__main__':
         producer.produce(topic=topic, value=serialized,
                          callback=delivery_callback)
         count += 1
-
-    # Block until the messages are sent.
-    producer.poll(10000)
-    producer.flush()
+        # Block until the messages are sent.
+        producer.poll(10000)
+        producer.flush()
+        sleep(1)
