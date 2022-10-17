@@ -10,6 +10,7 @@ tmp/
 .directory
 
 test_files/
+simulation/
 
 # tkinter
 __pycache__
