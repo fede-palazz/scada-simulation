@@ -1,10 +1,16 @@
+# libraries && binaries
 node_modules/
 dist/
 tmp/
+
+# IDE
 .idea/
 .vscode/
 .prettierrc
 .directory
 
+test_files/
+
+# tkinter
 __pycache__
 tk
