@@ -7,7 +7,8 @@ class OperatorHMI(Tk):
     def __init__(self):
         super().__init__()
 
-        self.img_path = "./assets/imgs/machine.jpg"
+        self.ASSETS_PATH = "src/assets/"
+        self.IMG_PATH = self.ASSETS_PATH + "imgs/machine.jpg"
 
         # configure the root window
         self.title('Operator HMI')
@@ -31,7 +32,7 @@ class OperatorHMI(Tk):
 
         # Img label
         # Create an object of tkinter ImageTk
-        self.img = ImageTk.PhotoImage(Image.open(self.img_path))
+        self.img = ImageTk.PhotoImage(Image.open(self.IMG_PATH))
         # Create a Label Widget to display the text or Image
         self.img_lbl = ttk.Label(self.mainframe, image=self.img, width=80)
         self.img_lbl.grid(column=0, row=1, sticky=(N, W), pady=(5, 25))
