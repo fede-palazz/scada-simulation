@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package teaming;
+
+message MachineDataMessage {
+  float temp = 1;
+  float power = 2;
+  bool alarm = 3;
+}
