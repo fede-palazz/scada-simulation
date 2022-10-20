@@ -9,9 +9,6 @@ tmp/
 .prettierrc
 .directory
 
-test_files/
-simulation/
-
 # tkinter
 __pycache__
 tk
