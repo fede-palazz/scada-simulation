@@ -3,7 +3,7 @@
 from random import choice
 from confluent_kafka import Producer
 #import assets.helloworld_pb2 as HelloWorld
-import assets.machine_data_pb2 as MachineData
+import assets.proto.machine_data_pb2 as MachineData
 from time import sleep
 import random
 
