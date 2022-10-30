@@ -8,7 +8,6 @@ import assets.machine_data_pb2 as MachineData
 
 
 def checkMessages(topic, app):
-    print(topic)
     config = {'bootstrap.servers': 'localhost:9092',
               'group.id': 'consumer_test',
               'auto.offset.reset': 'earliest'}
@@ -20,8 +19,8 @@ def checkMessages(topic, app):
     consumer.subscribe([topic])
 
     t = threading.current_thread()
-    print(type(app))
-    # Poll for new messages from Kafka and print them.
+
+    # Poll for new messages from Kafka and print them
     try:
         while getattr(t, "do_run", True):
             msg = consumer.poll(1.0)

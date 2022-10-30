@@ -7,7 +7,7 @@ class OperatorHMI(Tk):
     def __init__(self):
         super().__init__()
 
-        self.ASSETS_PATH = "src/assets/"
+        self.ASSETS_PATH = "assets/"
         self.IMG_PATH = self.ASSETS_PATH + "imgs/machine.jpg"
 
         # configure the root window
