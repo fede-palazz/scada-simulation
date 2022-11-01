@@ -1,9 +1,8 @@
-from gui import OperatorHMI
+from gui.root import OperatorHMI
 from time import sleep
 from confluent_kafka import Consumer
 import threading
 from time import sleep
-#import assets.helloworld_pb2 as HelloWorld
 import assets.proto.machine_data_pb2 as MachineData
 
 
@@ -11,11 +10,7 @@ def checkMessages(topic, app):
     config = {'bootstrap.servers': 'localhost:9092',
               'group.id': 'consumer_test',
               'auto.offset.reset': 'earliest'}
-    # Create Consumer instance
     consumer = Consumer(config)
-    # Subscribe to topic
-    # topic = "teaming_event"
-    # consumer.subscribe([topic], on_assign=reset_offset)
     consumer.subscribe([topic])
 
     t = threading.current_thread()
@@ -56,8 +51,9 @@ def checkMessages(topic, app):
 
 if __name__ == '__main__':
     app = OperatorHMI()
-    t = threading.Thread(target=checkMessages, args=("teaming_event", app,))
-    t.start()
+    # Listen for Kafka messages
+    # t = threading.Thread(target=checkMessages, args=("teaming_event", app,))
+    # t.start()
     app.mainloop()
     print("Exited mainloop")
-    t.do_run = False
+    # t.do_run = False
