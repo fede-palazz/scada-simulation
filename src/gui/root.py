@@ -8,9 +8,11 @@ class OperatorHMI(Tk):
     def __init__(self):
         super().__init__()
 
+        # Constants
         self.ASSETS_PATH = "src/assets/"
         self.IMG_PATH = self.ASSETS_PATH + "imgs/machine.jpg"
         self.HEADER_STYLE_CLASS = "Header.TFrame"
+        self.HOME_STYLE_CLASS = "Home.TFrame"
 
         # Window config
         self.title('Operator HMI')
@@ -19,6 +21,7 @@ class OperatorHMI(Tk):
 
         # Global styling options
         self.style = ttk.Style(self)
+        # Initialise widgets
         self.__configure_style()
         self.__create_widgets()
         self.__render_widgets()
@@ -27,16 +30,19 @@ class OperatorHMI(Tk):
         header_options = {
             "background": "green",
         }
+        home_options = {
+            "background": "lightgrey"
+        }
         self.style.configure(self.HEADER_STYLE_CLASS, **header_options)
+        self.style.configure(self.HOME_STYLE_CLASS, **home_options)
         self.style.configure("Header.TLabel", foreground="white")
 
     def __create_widgets(self):
         # Header frame
         self.header_frame = HeaderFrame(
             self, self.style, self.HEADER_STYLE_CLASS)
-
         # Homepage frame
-        self.home_frame = HomeFrame(self, self.style)
+        self.home_frame = HomeFrame(self, self.style, self.HOME_STYLE_CLASS)
 
     def __render_widgets(self):
         self.rowconfigure(0, weight=1)

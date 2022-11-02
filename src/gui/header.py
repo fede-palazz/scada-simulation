@@ -7,17 +7,20 @@ class HeaderFrame(ttk.Frame):
     def __init__(self, container, style, style_class=""):
         super().__init__(container, style=style_class)
 
-        self.style = style
-        self.HEADER_STYLE_CLASS = style_class
+        # Constants
         self.TIME_STYLE_CLASS = "Time.Header.TLabel"
         self.DATE_STYLE_CLASS = "Date.Header.TLabel"
         self.TITLE_STYLE_CLASS = "Title.Header.TLabel"
         self.EMPTY_STYLE_CLASS = "Empty.Header.TLabel"
 
+        self.style = style
+        self.style_class = style_class
+        # Labels values
         self.date = StringVar()
         self.time = StringVar()
         self.title = StringVar()
 
+        # Initialise widgets
         self.__configure_style()
         self.__create_widgets()
         self.__render_widgets()
@@ -25,18 +28,18 @@ class HeaderFrame(ttk.Frame):
     def __configure_style(self):
         # Header frame bg color
         header_bg_color = self.style.lookup(
-            self.HEADER_STYLE_CLASS, "background")
+            self.style_class, "background")
         # Styling options
         time_options = {
-            "font": ("Arial", 13, "bold"),
+            "font": ("Arial", 14, "bold"),
             "background": header_bg_color
         }
         date_options = {
-            "font": ("Arial", 11, "italic"),
+            "font": ("Arial", 12, "italic"),
             "background": header_bg_color
         }
         title_options = {
-            "font": ("Arial", 14),
+            "font": ("Arial", 18),
             "anchor": "center",
             "background": header_bg_color
         }
@@ -82,4 +85,4 @@ class HeaderFrame(ttk.Frame):
                            padx=(0, 0))
         self.title_lbl.grid(row=0, column=2, sticky=(N, S),
                             ipadx=5)
-        self.empty_lbl.grid(row=0, column=3, sticky=(N, S), padx=55)
+        self.empty_lbl.grid(row=0, column=3, sticky=(N, S), padx=62)
