@@ -9,11 +9,13 @@ class HeaderFrame(ttk.Frame):
 
         self.style = style
         self.HEADER_STYLE_CLASS = style_class
+        self.TIME_STYLE_CLASS = "Time.Header.TLabel"
         self.DATE_STYLE_CLASS = "Date.Header.TLabel"
         self.TITLE_STYLE_CLASS = "Title.Header.TLabel"
         self.EMPTY_STYLE_CLASS = "Empty.Header.TLabel"
 
         self.date = StringVar()
+        self.time = StringVar()
         self.title = StringVar()
 
         self.__configure_style()
@@ -25,6 +27,10 @@ class HeaderFrame(ttk.Frame):
         header_bg_color = self.style.lookup(
             self.HEADER_STYLE_CLASS, "background")
         # Styling options
+        time_options = {
+            "font": ("Arial", 13, "bold"),
+            "background": header_bg_color
+        }
         date_options = {
             "font": ("Arial", 11, "italic"),
             "background": header_bg_color
@@ -38,6 +44,7 @@ class HeaderFrame(ttk.Frame):
             "background": header_bg_color
         }
 
+        self.style.configure(self.TIME_STYLE_CLASS, **time_options)
         self.style.configure(self.DATE_STYLE_CLASS, **date_options)
         self.style.configure(self.TITLE_STYLE_CLASS, **title_options)
         self.style.configure(self.EMPTY_STYLE_CLASS, **empty_options)
@@ -45,10 +52,14 @@ class HeaderFrame(ttk.Frame):
     def __create_widgets(self):
         # TODO: Create a thread to update current time
         now = datetime.now()
-        self.date.set(now.strftime("%H:%M - %d/%m"))
+        self.time.set(now.strftime("%H:%M "))
+        self.date.set(now.strftime(" %d/%m"))
         self.title.set("HOMEPAGE")
 
         # Current date and time
+        self.time_lbl = ttk.Label(
+            self, textvariable=self.time,
+            style=self.TIME_STYLE_CLASS)
         self.date_lbl = ttk.Label(
             self, textvariable=self.date,
             style=self.DATE_STYLE_CLASS)
@@ -61,10 +72,14 @@ class HeaderFrame(ttk.Frame):
 
     def __render_widgets(self):
         self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=4)
-        self.columnconfigure(2, weight=1)
+        self.columnconfigure(1, weight=1)
+        self.columnconfigure(2, weight=4)
+        self.columnconfigure(3, weight=2)
         self.rowconfigure(0, weight=1)
 
-        self.date_lbl.grid(row=0, column=0, sticky=(N, S))
-        self.title_lbl.grid(row=0, column=1, sticky=(N, S), ipadx=5)
-        self.empty_lbl.grid(row=0, column=2, sticky=(N, S), padx=50)
+        self.time_lbl.grid(row=0, column=0, sticky=(N, S, E))
+        self.date_lbl.grid(row=0, column=1, sticky=(N, S, W),
+                           padx=(0, 0))
+        self.title_lbl.grid(row=0, column=2, sticky=(N, S),
+                            ipadx=5)
+        self.empty_lbl.grid(row=0, column=3, sticky=(N, S), padx=55)
