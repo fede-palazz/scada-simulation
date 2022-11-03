@@ -8,6 +8,7 @@ class HeaderFrame(ttk.Frame):
         super().__init__(container, style=style_class)
 
         # Constants
+        self.DEFAULT_TITLE = "INCIDENT REPORT"
         self.TIME_STYLE_CLASS = "Time.Header.TLabel"
         self.DATE_STYLE_CLASS = "Date.Header.TLabel"
         self.TITLE_STYLE_CLASS = "Title.Header.TLabel"
@@ -39,7 +40,7 @@ class HeaderFrame(ttk.Frame):
             "background": header_bg_color
         }
         title_options = {
-            "font": ("Arial", 18),
+            "font": ("Comics Sans MS", 18),
             "anchor": "center",
             "background": header_bg_color
         }
@@ -57,7 +58,7 @@ class HeaderFrame(ttk.Frame):
         now = datetime.now()
         self.time.set(now.strftime("%H:%M "))
         self.date.set(now.strftime(" %d/%m"))
-        self.title.set("HOMEPAGE")
+        self.title.set(self.DEFAULT_TITLE)
 
         # Current date and time
         self.time_lbl = ttk.Label(
