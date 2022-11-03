@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 
 
-class SummaryFrame(ttk.Frame):
+class PartFrame(ttk.Frame):
     def __init__(self, container, style, style_class=""):
         super().__init__(container, style=style_class)
 
@@ -10,6 +10,7 @@ class SummaryFrame(ttk.Frame):
 
         self.style = style
         self.style_class = style_class
+        self.parent = container
 
         # Initialise widgets
         self.__configure_style()
@@ -20,7 +21,11 @@ class SummaryFrame(ttk.Frame):
         pass
 
     def __create_widgets(self):
-        pass
+        self.btn = ttk.Button(self, text="HOMEPAGE",
+                              command=lambda: self.show_homepage())
 
     def __render_widgets(self):
-        pass
+        self.btn.pack()
+
+    def show_homepage(self):
+        self.parent.show_page()
