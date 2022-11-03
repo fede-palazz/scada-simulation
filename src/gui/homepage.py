@@ -1,6 +1,9 @@
 from tkinter import *
 from tkinter import ttk
+from gui.summary import SummaryFrame
+from gui.part_incident import PartFrame
 from gui.machine_incident import MachineFrame
+from gui.last_reported import LastReportedFrame
 
 
 class HomeFrame(ttk.Frame):
@@ -10,17 +13,21 @@ class HomeFrame(ttk.Frame):
         # Constants
         self.BTN_STYLE_CLASS = "Home.TButton"
         self.SUMMARY_STYLE_CLASS = "Summary.TFrame"
-        self.MACHINE_STYLE_CLASS = "Machine.TFrame"
         self.PART_STYLE_CLASS = "Part.TFrame"
+        self.MACHINE_STYLE_CLASS = "Machine.TFrame"
         self.LAST_REPORTED_STYLE_CLASS = "LastReported.TFrame"
 
         self.style = style
         self.style_class = style_class
+        # Sub pages of the homepage frame
+        self._pages = {}
+        self.container = container
 
         # Initialise widgets
         self.__configure_style()
         self.__create_widgets()
         self.__render_widgets()
+        self.__create_pages()
 
     def __configure_style(self):
         btn_options = {
@@ -28,7 +35,15 @@ class HomeFrame(ttk.Frame):
         }
         # Styling options
         self.style.configure(self.BTN_STYLE_CLASS, **btn_options)
-        self.style.configure(self.MACHINE_STYLE_CLASS, background="lightblue")
+
+        self.style.configure(self.SUMMARY_STYLE_CLASS,
+                             background="lightorange")
+        self.style.configure(self.PART_STYLE_CLASS,
+                             background="lightgreen")
+        self.style.configure(self.MACHINE_STYLE_CLASS,
+                             background="lightblue")
+        self.style.configure(self.LAST_REPORTED_STYLE_CLASS,
+                             background="lightyellow")
 
     def __create_widgets(self):
         # Reported incident summary btn
@@ -64,3 +79,31 @@ class HomeFrame(ttk.Frame):
             row=3, column=0, **paddings)
         self.report_last_btn.grid(
             row=4, column=0, **paddings)
+
+    def __create_pages(self):
+        # Get Homepage frame total rows number
+        row_num = self.grid_size()[-1]
+        for subframe in (SummaryFrame,
+                         PartFrame,
+                         MachineFrame,
+                         LastReportedFrame):
+            page_name = subframe.__name__
+            # Create frame and set style
+            page = subframe(self, self.style,
+                            page_name.replace("Frame", ".TFrame"))
+            # Add new page to the dict
+            self._pages[page_name] = page
+            page.grid(row=0, column=0,
+                      sticky=(N, S, E, W),
+                      rowspan=row_num)
+        # Raise homepage frame
+        self.show_page("")
+
+    def show_page(self, page_name=""):
+        '''Show a frame for the given page name'''
+        if page_name in self._pages:
+            self._pages[page_name].tkraise()
+        else:
+            # Ungrid all the pages to show homepage
+            for page in self._pages.values():
+                page.grid_forget()
