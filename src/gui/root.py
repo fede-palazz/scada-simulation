@@ -39,7 +39,7 @@ class OperatorHMI(Tk):
 
     def __configure_style(self):
         header_options = {
-            "background": "green",
+            "background": "grey",
         }
         home_options = {
             "background": "lightgrey"
@@ -70,6 +70,7 @@ class OperatorHMI(Tk):
             # Assign the class name
             page_name = frame.__name__
             # Create frame and set style
+            # TODO: use a shared style for all the pages
             page = frame(self, self.style,
                          page_name.replace("Frame", ".TFrame"))
             # Add new page to the dict
@@ -86,7 +87,8 @@ class OperatorHMI(Tk):
         for page in self._pages.values():
             page.grid(row=1, column=0, sticky=(N, S, E, W))
         # Display the home frame
-        self.show_page("")
+        # TODO: Show homepage
+        self.show_page("MachineFrame")
 
     def show_page(self, page_name=""):
         '''Show a frame for the given page name'''
