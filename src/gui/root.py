@@ -88,7 +88,7 @@ class OperatorHMI(Tk):
             page.grid(row=1, column=0, sticky=(N, S, E, W))
         # Display the home frame
         # TODO: Show homepage
-        self.show_page("MachineFrame")
+        self.show_page("")
 
     def show_page(self, page_name=""):
         '''Show a frame for the given page name'''

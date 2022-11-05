@@ -7,6 +7,7 @@ class MachineFrame(ttk.Frame):
         super().__init__(container, style=style_class)
 
         # Constants
+        self.HEADING_TEXT = "Machine Incident"
         self.INCIDENT_TYPES_NUM = 4  # Incident types number
         self.HEADING_STYLE_CLASS = "Heading.Machine.TLabel"
         self.CBX_STYLE_CLASS = "Machine.TCheckbutton"
@@ -47,38 +48,45 @@ class MachineFrame(ttk.Frame):
         navbar_btn_options = {
             "font": ("Arial", 14)
         }
-        self.style.configure(self.HEADING_STYLE_CLASS, **heading_options)
-        self.style.configure(self.CBX_STYLE_CLASS, **cbx_options)
-        self.style.configure(self.NAVBAR_STYLE_CLASS, **navbar_options)
+        self.style.configure(self.HEADING_STYLE_CLASS,
+                             **heading_options)
+        self.style.configure(self.CBX_STYLE_CLASS,
+                             **cbx_options)
+        self.style.configure(self.NAVBAR_STYLE_CLASS,
+                             **navbar_options)
         self.style.configure(self.NAVBAR_BTN_STYLE_CLASS,
                              **navbar_btn_options)
 
     def __create_widgets(self):
         self.heading_lbl = ttk.Label(
-            self, text="Machine Incident", style=self.HEADING_STYLE_CLASS)
+            self, text=self.HEADING_TEXT, style=self.HEADING_STYLE_CLASS)
         # Checkboxes
-        self.stopped_cbx = ttk.Checkbutton(self,
-                                           text="Machine stopped",
-                                           variable=self._cbx_sel[0],
-                                           style=self.CBX_STYLE_CLASS)
-        self.alarm_cbx = ttk.Checkbutton(self,
-                                         text="Machine alarm sounded",
-                                         variable=self._cbx_sel[1],
-                                         style=self.CBX_STYLE_CLASS)
-        self.pokayoka_cbx = ttk.Checkbutton(self,
-                                            text="Poka-yoka malfunctioning",
-                                            variable=self._cbx_sel[2],
-                                            style=self.CBX_STYLE_CLASS)
-        self.noise_cbx = ttk.Checkbutton(self,
-                                         text="Abnormal noise from the machine",
-                                         variable=self._cbx_sel[3],
-                                         style=self.CBX_STYLE_CLASS)
+        self.stopped_cbx = ttk.Checkbutton(
+            self,
+            text="Machine stopped",
+            variable=self._cbx_sel[0],
+            style=self.CBX_STYLE_CLASS)
+        self.alarm_cbx = ttk.Checkbutton(
+            self,
+            text="Machine alarm sounded",
+            variable=self._cbx_sel[1],
+            style=self.CBX_STYLE_CLASS)
+        self.pokayoke_cbx = ttk.Checkbutton(
+            self,
+            text="Poka-yoke malfunctioning",
+            variable=self._cbx_sel[2],
+            style=self.CBX_STYLE_CLASS)
+        self.noise_cbx = ttk.Checkbutton(
+            self,
+            text="Abnormal noise from the machine",
+            variable=self._cbx_sel[3],
+            style=self.CBX_STYLE_CLASS)
         # Bottom Navbar
         self.navbar = ttk.Frame(self, style=self.NAVBAR_STYLE_CLASS)
         self.back_btn = ttk.Button(
-            self.navbar, text="BACK", style=self.NAVBAR_BTN_STYLE_CLASS, command=lambda: self.on_back_btn())
+            self.navbar, text="BACK", style=self.NAVBAR_BTN_STYLE_CLASS, command=lambda: self.on_back_click())
         self.report_btn = ttk.Button(
-            self.navbar, text="REPORT", style=self.NAVBAR_BTN_STYLE_CLASS, command=lambda: self.on_report_btn())
+            self.navbar, text="REPORT", style=self.NAVBAR_BTN_STYLE_CLASS, command=lambda: self.on_report_click())
 
     def __render_widgets(self):
         self.columnconfigure(0, weight=1)
@@ -97,7 +105,7 @@ class MachineFrame(ttk.Frame):
         # Checkboxes
         self.stopped_cbx.grid(row=1, column=0, sticky=(W), **paddings)
         self.alarm_cbx.grid(row=2, column=0, sticky=(W), **paddings)
-        self.pokayoka_cbx.grid(row=3, column=0, sticky=(W), **paddings)
+        self.pokayoke_cbx.grid(row=3, column=0, sticky=(W), **paddings)
         self.noise_cbx.grid(row=4, column=0, sticky=(W), **paddings)
         # Navbar
         self.navbar.grid(row=6, column=0)
@@ -105,11 +113,11 @@ class MachineFrame(ttk.Frame):
         self.back_btn.pack(side=LEFT, **paddings_btn)
         self.report_btn.pack(side=RIGHT, **paddings_btn)
 
-    def on_back_btn(self):
+    def on_back_click(self):
         """ Reset frame state and show homepage """
         # TODO: Reset frame state
         self.parent.show_page()
 
-    def on_report_btn(self):
+    def on_report_click(self):
         # TODO: Implement machine incident sreport functionality
         self.parent.show_page()
