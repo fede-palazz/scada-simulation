@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 
 class MachineFrame(ttk.Frame):
@@ -119,7 +120,11 @@ class MachineFrame(ttk.Frame):
         self.parent.show_page()
 
     def on_report_click(self):
-        # TODO: Implement machine incident sreport functionality
+        # TODO: Implement machine incident report functionality
+        # Show report confirmation message
+        messagebox.showinfo(title="Report Status",
+                            message="Machine incident successfully reported!")
+        # TODO: Handle report errors
         self.reset_state()
         self.parent.show_page()
 
