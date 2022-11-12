@@ -9,6 +9,7 @@ class HeaderFrame(ttk.Frame):
 
         # Constants
         self.DEFAULT_TITLE = "INCIDENT REPORT"
+        self.HEADING_STYLE_CLASS = "Header.TLabel"
         self.TIME_STYLE_CLASS = "Time.Header.TLabel"
         self.DATE_STYLE_CLASS = "Date.Header.TLabel"
         self.TITLE_STYLE_CLASS = "Title.Header.TLabel"
@@ -31,6 +32,9 @@ class HeaderFrame(ttk.Frame):
         header_bg_color = self.style.lookup(
             self.style_class, "background")
         # Styling options
+        heading_options = {
+            "foreground": "white"
+        }
         time_options = {
             "font": ("Arial", 14, "bold"),
             "background": header_bg_color
@@ -48,6 +52,7 @@ class HeaderFrame(ttk.Frame):
             "background": header_bg_color
         }
 
+        self.style.configure(self.HEADING_STYLE_CLASS, **heading_options)
         self.style.configure(self.TIME_STYLE_CLASS, **time_options)
         self.style.configure(self.DATE_STYLE_CLASS, **date_options)
         self.style.configure(self.TITLE_STYLE_CLASS, **title_options)

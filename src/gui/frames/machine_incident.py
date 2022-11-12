@@ -115,9 +115,15 @@ class MachineFrame(ttk.Frame):
 
     def on_back_click(self):
         """ Reset frame state and show homepage """
-        # TODO: Reset frame state
+        self.reset_state()
         self.parent.show_page()
 
     def on_report_click(self):
         # TODO: Implement machine incident sreport functionality
+        self.reset_state()
         self.parent.show_page()
+
+    def reset_state(self):
+        """ Reset checkbox values """
+        for value in self._cbx_sel:
+            value.set(0)

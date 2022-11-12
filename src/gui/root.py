@@ -16,6 +16,7 @@ class OperatorHMI(Tk):
         self.ASSETS_PATH = "src/assets/"
         self.IMG_PATH = self.ASSETS_PATH + "imgs/machine.jpg"
         self.HEADER_STYLE_CLASS = "Header.TFrame"
+        # Sub-pages style classes
         self.HOME_STYLE_CLASS = "Home.TFrame"
         self.SUMMARY_STYLE_CLASS = "Summary.TFrame"
         self.PART_STYLE_CLASS = "Part.TFrame"
@@ -41,21 +42,19 @@ class OperatorHMI(Tk):
         header_options = {
             "background": "grey",
         }
-        home_options = {
+        page_options = {
             "background": "lightgrey"
         }
         self.style.configure(self.HEADER_STYLE_CLASS, **header_options)
-        self.style.configure(self.HOME_STYLE_CLASS, **home_options)
-        self.style.configure("Header.TLabel", foreground="white")
-
+        self.style.configure(self.HOME_STYLE_CLASS, **page_options)
         self.style.configure(self.SUMMARY_STYLE_CLASS,
-                             background="lightsalmon")
+                             **page_options)
         self.style.configure(self.PART_STYLE_CLASS,
-                             background="lightgreen")
+                             **page_options)
         self.style.configure(self.MACHINE_STYLE_CLASS,
-                             background="lightblue")
+                             **page_options)
         self.style.configure(self.LAST_REPORTED_STYLE_CLASS,
-                             background="lightyellow")
+                             **page_options)
 
     def __create_widgets(self):
         # Header frame
