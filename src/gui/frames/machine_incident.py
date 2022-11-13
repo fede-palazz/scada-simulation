@@ -114,6 +114,10 @@ class MachineFrame(ttk.Frame):
         self.back_btn.pack(side=LEFT, **paddings_btn)
         self.report_btn.pack(side=RIGHT, **paddings_btn)
 
+    def on_check(self):
+        # TODO: Enable report button if at least one cbx is checked
+        pass
+
     def on_back_click(self):
         """ Reset frame state and show homepage """
         self.reset_state()
