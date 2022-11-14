@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from gui.header import HeaderFrame
 from gui.homepage import HomeFrame
-from gui.frames.summary import SummaryFrame
+from gui.frames.summary_pages.summary import SummaryFrame
 from gui.frames.part_incident_pages.part_incident import PartFrame
 from gui.frames.machine_incident import MachineFrame
 from gui.frames.last_reported import LastReportedFrame
@@ -86,8 +86,7 @@ class OperatorHMI(Tk):
         for page in self._pages.values():
             page.grid(row=1, column=0, sticky=(N, S, E, W))
         # Display the home frame
-        # TODO: Show homepage
-        self.show_page("PartFrame")
+        self.show_page("SummaryFrame")
 
     def show_page(self, page_name=""):
         '''Show a frame for the given page name'''
