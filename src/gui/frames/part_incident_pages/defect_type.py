@@ -31,11 +31,16 @@ class DefectTypeFrame(ttk.Frame):
     def __configure_style(self):
         parent_bg_color = self.style.lookup(
             self.style_class, "background")
+        btn_options = {
+            "font": ("Arial", 14),
+        }
+        self.style.configure(self.BTN_STYLE_CLASS, **btn_options)
 
     def __create_widgets(self):
         # Create buttons list
         for defect in self.defects:
-            self.btn_list.append(ttk.Button(self, text=defect))
+            self.btn_list.append(ttk.Button(self, text=defect,
+                                            style=self.BTN_STYLE_CLASS))
         # Navigation buttons
         self.next_page_btn = ttk.Button(self, text="-->",
                                         command=lambda: self.__on_next_page_click())
@@ -54,9 +59,10 @@ class DefectTypeFrame(ttk.Frame):
         # Display defect type buttons
         self.render_buttons()
         # Render navigation buttons
-        self.previous_page_btn.grid(row=1, column=0)
-        self.next_page_btn.grid(row=1, column=3)
-        self.update_nav_state()
+        if len(self.btn_list) > self.OFFSET:
+            self.previous_page_btn.grid(row=1, column=0)
+            self.next_page_btn.grid(row=1, column=3)
+            self.update_nav_state()
 
     def render_buttons(self):
         """ Render buttons based on current displayed page """
@@ -121,6 +127,4 @@ class DefectTypeFrame(ttk.Frame):
         """ Check whether a type of defect has a specific location """
         if defect_name in self.defects:
             return self.defects.get(defect_name)
-        else:
-            raise Exception(
-                defect_name + " defect not found inside dictionary")
+        raise Exception(defect_name + " defect not found inside dictionary")

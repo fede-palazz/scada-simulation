@@ -9,6 +9,10 @@ class PartFrame(ttk.Frame):
 
         # Constants
         self.HEADING_TEXT = "Part Incident"
+        self.OKPART_HEADING_TEXT = self.HEADING_TEXT + \
+            " > OK Part"
+        self.NOKPART_HEADING_TEXT = self.HEADING_TEXT + \
+            " > NOK Part"
         self.HEADING_STYLE_CLASS = "Heading.Part.TLabel"
         self.BTN_STYLE_CLASS = "Part.TButton"
         self.DEFECT_TYPE_STYLE_CLASS = "DefectType.Part.TFrame"
@@ -25,21 +29,17 @@ class PartFrame(ttk.Frame):
             "mark": True,
             "surface bubble": True,
             "slight burrs": False,
-            "test1": True,
-            "test2": True,
-            "test3": False,
-            "test4": True,
         }
         self.NOK_PART_DEFECTS = {
             "burrs": True,
             "marbling": True,
-            # "color nok": True,
-            # "oil gas": True,
-            # "mark": True,
-            # "deformation": True,
-            # "surface bubble": True,
-            # "lack material": True,
-            # "short piece": True,
+            "color nok": True,
+            "oil gas": True,
+            "mark": True,
+            "deformation": True,
+            "surface bubble": True,
+            "lack material": True,
+            "short piece": True,
         }
 
         self.style = style
@@ -59,10 +59,10 @@ class PartFrame(ttk.Frame):
             "background": parent_bg_color,
         }
         defect_type_options = {
-            "background": parent_bg_color
+            "background": parent_bg_color,
         }
         defect_location_options = {
-            "background": parent_bg_color
+            "background": parent_bg_color,
         }
         navbar_options = {
             "background": parent_bg_color,
@@ -111,7 +111,7 @@ class PartFrame(ttk.Frame):
         self.rowconfigure(0, weight=1)  # Heading label
         self.rowconfigure(1, weight=2)  # Ok part btn
         self.rowconfigure(2, weight=2)  # Nok part btn
-        self.rowconfigure(3, weight=1)  # Blank space
+        self.rowconfigure(3, weight=2)  # Blank space
         self.rowconfigure(4, weight=1)  # Bottom navbar
         self.rowconfigure(5, weight=1)  # Blank space
 
@@ -140,6 +140,8 @@ class PartFrame(ttk.Frame):
                                 rowspan=3)
         # Change behaviour of Back button
         self.back_btn.configure(command=self.hide_children)
+        # Change heading title
+        self.heading_lbl["text"] = self.OKPART_HEADING_TEXT
         self.ok_part_frame.tkraise()
 
     def on_nokpart_click(self):
@@ -149,6 +151,8 @@ class PartFrame(ttk.Frame):
                                  rowspan=3)
         # Change behaviour of Back button
         self.back_btn.configure(command=self.hide_children)
+        # Change heading title
+        self.heading_lbl["text"] = self.NOKPART_HEADING_TEXT
         self.nok_part_frame.tkraise()
 
     def hide_children(self):
@@ -156,3 +160,5 @@ class PartFrame(ttk.Frame):
         self.nok_part_frame.grid_forget()
         # Restore normal Back button behaviour
         self.back_btn.configure(command=self.show_homepage)
+        # Restore default heading text
+        self.heading_lbl["text"] = self.HEADING_TEXT
